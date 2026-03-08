@@ -1,11 +1,8 @@
 import { io } from 'socket.io-client';
 
-// Auto-detect server URL:
-// - In development: connect to localhost:4000
-// - In production: connect to the same host (Railway serves everything from one URL)
-const SERVER_URL = import.meta.env.PROD
-    ? window.location.origin
-    : 'http://localhost:4000';
+// In development:  connects to localhost:4000
+// In production:   reads VITE_BACKEND_URL from Vercel env vars (set to your Railway URL)
+const SERVER_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
 
 const socket = io(SERVER_URL, {
     autoConnect: true,

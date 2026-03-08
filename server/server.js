@@ -13,7 +13,9 @@ const PORT = process.env.PORT || 4000;
 
 const io = new Server(httpServer, {
     cors: {
-        origin: '*',
+        // Set CORS_ORIGIN in Railway to your Vercel URL, e.g. https://your-app.vercel.app
+        // Falls back to * (all origins) for local development
+        origin: process.env.CORS_ORIGIN || '*',
         methods: ['GET', 'POST'],
     },
 });
