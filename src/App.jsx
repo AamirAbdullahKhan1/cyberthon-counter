@@ -5,6 +5,7 @@ import InaugurationPage from './components/InaugurationPage';
 import CountdownPage from './components/CountdownPage';
 import NotificationOverlay from './components/NotificationOverlay';
 import AdminPanel from './components/AdminPanel';
+import AdminLogin from './components/AdminLogin';
 import socket from './socket';
 import {
   getPhase,
@@ -17,6 +18,10 @@ export default function App() {
   const [phase, setPhaseState] = useState(getPhase());
   const [targetTime, setTargetTimeState] = useState(getTargetTime());
   const [notifications, setNotifications] = useState([]);
+  // Check if admin is already authenticated this session
+  const [isAdminAuthed, setIsAdminAuthed] = useState(
+    () => sessionStorage.getItem('cyberthon_admin_auth') === '1'
+  );
 
   // Listen for Socket.io events from the backend
   useEffect(() => {
@@ -110,7 +115,15 @@ export default function App() {
           <NotificationOverlay notifications={notifications} />
         </>
       } />
-      <Route path="/admin" element={<AdminPanel />} />
+      <Route path="/admin" element={
+        <AnimatePresence mode="wait">
+          {isAdminAuthed ? (
+            <AdminPanel key="panel" />
+          ) : (
+            <AdminLogin key="login" onAuthenticated={() => setIsAdminAuthed(true)} />
+          )}
+        </AnimatePresence>
+      } />
     </Routes>
   );
 }
