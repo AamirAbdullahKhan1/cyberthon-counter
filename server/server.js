@@ -1,11 +1,7 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 const httpServer = createServer(app);
@@ -26,15 +22,6 @@ let appState = {
     targetTime: null,       // Unix timestamp (ms) when countdown ends
     timerDuration: 1440,    // default 24 hours in minutes
 };
-
-// Serve static files from the built React app
-const distPath = path.join(__dirname, '..', 'dist');
-app.use(express.static(distPath));
-
-// All non-API routes serve the React SPA (for client-side routing like /admin)
-app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
-});
 
 // --- Socket.io ---
 io.on('connection', (socket) => {
