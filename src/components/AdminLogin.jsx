@@ -5,7 +5,8 @@ import '../styles/AdminLogin.css';
 // Credentials stored as SHA-256 hashes — plaintext password never lives in the bundle.
 // Username is less sensitive so stored as-is.
 const ADMIN_USERNAME = 'cyberthon';
-const ADMIN_PASSWORD_HASH = '8e1ec4ecd989ee9097f3ded1de426a8865f41b08a';
+const ADMIN_PASSWORD_HASH = '8e1ec4ecd989ee9097f3ded10325fb3c51acd0b4da2c0bcde426a8865f41b08a';
+
 
 async function sha256(message) {
     const encoder = new TextEncoder();
