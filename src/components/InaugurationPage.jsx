@@ -59,7 +59,6 @@ export default function InaugurationPage() {
                 <div className="inauguration-sparkle">
                     <span className="sparkle-icon">✦</span>
                     <h1 className="inauguration-title">CYBERTHON'26</h1>
-                    
                 </div>
 
                 <p className="inauguration-subtitle">
