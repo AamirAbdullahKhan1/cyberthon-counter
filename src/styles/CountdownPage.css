@@ -8,6 +8,28 @@
     overflow: hidden;
 }
 
+/* ===== Top Logos ===== */
+.top-logos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: clamp(16px, 3vh, 48px) clamp(24px, 4vw, 64px);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.top-logo {
+    height: clamp(60px, 10vh, 120px);
+    width: auto;
+    max-width: 28vw;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+
 /* ===== Hero Section ===== */
 .countdown-hero {
     position: relative;

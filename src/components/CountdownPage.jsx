@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import CountdownTimer from './CountdownTimer';
 import gridScanVideo from '../assets/grid-scan.webm';
+import srmLogo from '../assets/srm-logo.png';
+import cceeLogo from '../assets/ccee-logo.png';
 import '../styles/CountdownPage.css';
 
 export default function CountdownPage({ targetTime }) {
@@ -44,6 +46,26 @@ export default function CountdownPage({ targetTime }) {
             >
                 <source src={gridScanVideo} type="video/webm" />
             </video>
+
+            {/* Top Logos */}
+            <motion.div className="top-logos" variants={itemVariants}>
+                <motion.img 
+                    src={srmLogo} 
+                    alt="SRM Logo" 
+                    className="top-logo logo-left"
+                    initial={{ opacity: 0, scale: 0.8, x: -30 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+                />
+                <motion.img 
+                    src={cceeLogo} 
+                    alt="CCEE Logo" 
+                    className="top-logo logo-right"
+                    initial={{ opacity: 0, scale: 0.8, x: 30 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+                />
+            </motion.div>
 
             {/* Hero Section — everything in one viewport */}
             <motion.div className="countdown-hero" variants={itemVariants}>
