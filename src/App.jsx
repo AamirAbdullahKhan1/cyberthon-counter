@@ -12,6 +12,7 @@ import {
   getTargetTime,
   onMessage,
   playAlertSound,
+  playFaaahSound,
 } from './channel';
 
 export default function App() {
@@ -44,9 +45,15 @@ export default function App() {
       playAlertSound();
     });
 
+    // Receive FAAAAHHH sound trigger
+    socket.on('sound-faaah', () => {
+      playFaaahSound();
+    });
+
     return () => {
       socket.off('state-sync');
       socket.off('notification');
+      socket.off('sound-faaah');
     };
   }, []);
 
@@ -67,6 +74,9 @@ export default function App() {
             playAlertSound(); // Play only when adding a new notification
             return [...prev, { id: data.id, message: data.message }];
           });
+          break;
+        case 'sound-faaah':
+          playFaaahSound();
           break;
         case 'reset':
           setPhaseState('inauguration');

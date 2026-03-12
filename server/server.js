@@ -59,6 +59,12 @@ io.on('connection', (socket) => {
         console.log(`Notification sent: ${message}`);
     });
 
+    // Coordinator triggers the FAAAAHHH sound
+    socket.on('play-faaah', () => {
+        io.emit('sound-faaah', { id: Date.now() });
+        console.log(`Sound trigger: FAAAHHHH`);
+    });
+
     // Reset back to inauguration
     socket.on('reset', () => {
         appState = {

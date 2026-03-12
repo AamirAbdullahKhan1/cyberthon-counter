@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-import { sendNotification, setTargetTime, setTimerDuration, resetState, setPhase } from '../channel';
+import { sendNotification, setTargetTime, setTimerDuration, resetState, setPhase, sendFaaahSound } from '../channel';
+import socket from '../socket'; // ensure we can emit via socket too if needed
 import '../styles/CoordinatorPanel.css';
 
 const PRESET_MESSAGES = [
@@ -117,6 +118,23 @@ export default function CoordinatorPanel({ isOpen, onClose }) {
                                     {preset}
                                 </button>
                             ))}
+                        </div>
+                    </div>
+
+                    {/* Soundboard */}
+                    <div className="panel-section">
+                        <div className="panel-section-title">Soundboard</div>
+                        <div className="preset-grid">
+                            <button
+                                className="preset-btn pulse-btn"
+                                onClick={() => {
+                                    sendFaaahSound();          // Local broadcast channel
+                                    socket.emit('play-faaah'); // Cross-device socket emit
+                                }}
+                                style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
+                            >
+                                🔊 Play "FAAAHHHH"
+                            </button>
                         </div>
                     </div>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { playAlertSound } from '../channel';
+import { playAlertSound, playFaaahSound, onMessage } from '../channel';
 import '../styles/NotificationOverlay.css';
 
 export default function NotificationOverlay({ notifications }) {
@@ -7,6 +7,16 @@ export default function NotificationOverlay({ notifications }) {
     const processedIds = useRef(new Set());
 
     useEffect(() => {
+        // Listen for sound-only broadcasts
+        const handleMessage = (data) => {
+            if (data.type === 'sound-faaah') {
+                playFaaahSound();
+            }
+        };
+        // We only want to set this up once, but the underlying onMessage isn't unsubscribable
+        // in our current channel.js setup. Since the overlay mounts once on the countdown page, it's fine.
+        onMessage(handleMessage);
+
         if (notifications.length === 0) return;
 
         const latest = notifications[notifications.length - 1];

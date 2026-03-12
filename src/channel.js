@@ -47,6 +47,11 @@ export function sendNotification(message) {
   channel.postMessage({ type: 'notification', message, id: Date.now() });
 }
 
+// Send FAAAHHHH sound trigger to all tabs
+export function sendFaaahSound() {
+  channel.postMessage({ type: 'sound-faaah', id: Date.now() });
+}
+
 // Listen for messages
 export function onMessage(callback) {
   channel.addEventListener('message', (event) => {
@@ -55,6 +60,7 @@ export function onMessage(callback) {
 }
 
 import alertSoundFile from './assets/cyber-notification.wav';
+import faaahSoundFile from './assets/faaah.mp3';
 
 // Play alert beep sound using Web Audio API / Custom Sound
 export function playAlertSound() {
@@ -63,6 +69,16 @@ export function playAlertSound() {
     audio.play().catch(e => console.warn('Audio play failed:', e));
   } catch (e) {
     console.warn('Could not play alert sound:', e);
+  }
+}
+
+// Play FAAAHHHH sound
+export function playFaaahSound() {
+  try {
+    const audio = new Audio(faaahSoundFile);
+    audio.play().catch(e => console.warn('Audio play failed:', e));
+  } catch (e) {
+    console.warn('Could not play FAAAHHHH sound:', e);
   }
 }
 

@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import socket from '../socket';
+import { sendFaaahSound } from '../channel';
 import '../styles/AdminPanel.css';
 
 const PRESET_MESSAGES = [
@@ -163,6 +164,24 @@ export default function AdminPanel() {
                                         <span className="template-text">{preset.text}</span>
                                     </button>
                                 ))}
+                            </div>
+                        </section>
+
+                        {/* Soundboard */}
+                        <section className="admin-card">
+                            <h2 className="card-title">Soundboard</h2>
+                            <div className="template-grid">
+                                <button
+                                    className="template-btn"
+                                    onClick={() => {
+                                        sendFaaahSound();          // Local broadcast channel
+                                        socket.emit('play-faaah'); // Cross-device socket emit
+                                    }}
+                                    style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
+                                >
+                                    <span className="template-emoji">🔊</span>
+                                    <span className="template-text">Play "FAAAHHHH"</span>
+                                </button>
                             </div>
                         </section>
 

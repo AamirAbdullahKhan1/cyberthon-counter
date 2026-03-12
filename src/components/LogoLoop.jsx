@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/LogoLoop.css';
 
 // 4 Sponsor Logos
-import logoCybertracs from '../assets/cybertracs-logo-w.png';
+import logoCybertracs from '../assets/cybertracs-logo.png';
 import logoThinkroot from '../assets/thinkroot-logo.png';
 import logoFortinet from '../assets/fortinet-logo.png';
 import logoYespanchi from '../assets/yespanchi-logo.png';
