@@ -1,11 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
+import alertSoundFile from '../assets/cyber-notification.wav';
 
 export default function CountdownTimer({ targetTime }) {
     const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
     const [prevDigits, setPrevDigits] = useState({ hours: '', minutes: '', seconds: '' });
     const intervalRef = useRef(null);
+    const audioPlayedRef = useRef(false); // Prevents infinite ringing loop
 
     useEffect(() => {
+        // Reset the audio flag if a new future target time is set
+        if (targetTime > Date.now()) {
+            audioPlayedRef.current = false;
+        }
+
         const calculateTimeLeft = () => {
             const now = Date.now();
             const diff = Math.max(0, targetTime - now);
@@ -25,6 +32,14 @@ export default function CountdownTimer({ targetTime }) {
 
             if (diff === 0 && intervalRef.current) {
                 clearInterval(intervalRef.current);
+                
+                // Play notification sound when event concludes!
+                if (!audioPlayedRef.current && targetTime > 0) {
+                    audioPlayedRef.current = true;
+                    const alertAudio = new Audio(alertSoundFile);
+                    alertAudio.volume = 1.0;
+                    alertAudio.play().catch(e => console.error("Audio block:", e));
+                }
             }
         };
 

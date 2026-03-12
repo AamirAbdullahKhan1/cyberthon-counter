@@ -3,6 +3,7 @@ import CountdownTimer from './CountdownTimer';
 import gridScanVideo from '../assets/grid-scan.webm';
 import srmLogo from '../assets/srm-logo.png';
 import cceeLogo from '../assets/ccee-logo.png';
+import LogoLoop from './LogoLoop';
 import '../styles/CountdownPage.css';
 
 export default function CountdownPage({ targetTime }) {
@@ -94,28 +95,7 @@ export default function CountdownPage({ targetTime }) {
             {/* Sponsors — pinned to bottom */}
             <motion.div className="sponsors-section" variants={itemVariants}>
                 <div className="sponsors-label">STRATEGIC PARTNERS & SPONSORS</div>
-                <div className="sponsors-logos">
-                    <div className="sponsor-item">
-                        <span className="sponsor-icon">🛡️</span>
-                        <span>SENTRY</span>
-                    </div>
-                    <div className="sponsor-item">
-                        <span className="sponsor-icon">🌐</span>
-                        <span>NEXUS</span>
-                    </div>
-                    <div className="sponsor-item">
-                        <span className="sponsor-icon">⚡</span>
-                        <span>VOLT</span>
-                    </div>
-                    <div className="sponsor-item">
-                        <span className="sponsor-icon">🔗</span>
-                        <span>CHAIN</span>
-                    </div>
-                    <div className="sponsor-item">
-                        <span className="sponsor-icon">⬡</span>
-                        <span>CORE</span>
-                    </div>
-                </div>
+                <LogoLoop />
             </motion.div>
         </motion.div>
     );

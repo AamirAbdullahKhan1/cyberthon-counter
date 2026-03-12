@@ -1,0 +1,57 @@
+.logo-loop-container {
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+    /* Fade edges for a clean entrance/exit effect */
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.logo-loop-track {
+    display: flex;
+    width: max-content;
+    gap: 95px; /* Matches requested gap */
+    animation: scroll 70s linear infinite; /* Matches requested speed=70 */
+}
+
+/* Pause/slow down on hover */
+.logo-loop-container:hover .logo-loop-track {
+    animation-play-state: paused;
+    /* To implement hoverSpeed=30 in pure CSS, we can just pause it or slow it significantly. 
+       Pausing on hover is standard for sponsor lists so users can read them. */
+}
+
+.logo-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Increase width to ensure enough spacing */
+    min-width: 250px; 
+}
+
+.sponsor-logo-img {
+    height: 70px; /* Matches requested logoHeight=70 */
+    width: auto;
+    max-width: 350px; /* Prevent overly wide logos from dominating */
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4)) grayscale(50%) brightness(1.2);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.sponsor-logo-img:hover {
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6)) grayscale(0%) brightness(1.1);
+    transform: scale(1.05);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Move it left by exactly one set's width. 
+           Since we have 4 sets, dragging it 50% guarantees a perfect seamless loop 
+           if the container holds 2 full sets. */
+        transform: translateX(calc(-50% - (95px / 2)));
+    }
+}

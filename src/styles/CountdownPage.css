@@ -89,7 +89,7 @@
 /* Title */
 .countdown-title {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 8vw, 12rem);
+    font-size: clamp(2rem, 6vw, 10rem); /* Reduced from 12rem max */
     font-weight: 900;
     font-style: italic;
     letter-spacing: 0.03em;
@@ -150,8 +150,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: clamp(100px, 14vw, 240px);
-    height: clamp(120px, 18vh, 260px);
+    width: clamp(80px, 12vw, 210px); /* Reduced width */
+    height: clamp(100px, 15vh, 230px); /* Reduced height */
     border: 1px solid var(--border-color);
     border-radius: clamp(8px, 1vw, 20px);
     background: rgba(15, 23, 42, 0.6);
@@ -171,7 +171,7 @@
 
 .timer-digit {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 9rem);
+    font-size: clamp(2.5rem, 6vw, 7.5rem); /* Reduced digit size */
     font-weight: 900;
     color: var(--text-primary);
     line-height: 1;
@@ -195,7 +195,7 @@
     z-index: 1;
     width: 100%;
     border-top: 1px solid var(--border-color);
-    padding: clamp(12px, 2vh, 32px) clamp(16px, 3vw, 48px);
+    padding: clamp(8px, 1vh, 16px) 0 0 0; /* Reduced padding to give logo loop more room */
     text-align: center;
     flex-shrink: 0;
 }
@@ -207,35 +207,5 @@
     letter-spacing: 0.35em;
     color: var(--text-muted);
     text-transform: uppercase;
-    margin-bottom: clamp(8px, 1.5vh, 24px);
-}
-
-.sponsors-logos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(24px, 5vw, 100px);
-    flex-wrap: wrap;
-}
-
-.sponsor-item {
-    display: flex;
-    align-items: center;
-    gap: clamp(6px, 0.6vw, 14px);
-    font-family: var(--font-display);
-    font-size: clamp(0.8rem, 1.2vw, 2rem);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    transition: color var(--transition-fast);
-}
-
-.sponsor-item:hover {
-    color: var(--text-secondary);
-}
-
-.sponsor-icon {
-    font-size: clamp(1rem, 1.5vw, 2.5rem);
-    opacity: 0.6;
-}
+    margin-bottom: clamp(4px, 1vh, 12px);
+}
