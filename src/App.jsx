@@ -6,6 +6,7 @@ import CountdownPage from './components/CountdownPage';
 import NotificationOverlay from './components/NotificationOverlay';
 import AdminPanel from './components/AdminPanel';
 import AdminLogin from './components/AdminLogin';
+import DeanButtonPage from './components/DeanButtonPage';
 import socket from './socket';
 import {
   getPhase,
@@ -134,6 +135,7 @@ export default function App() {
           )}
         </AnimatePresence>
       } />
+      <Route path="/button" element={<DeanButtonPage />} />
     </Routes>
   );
 }
