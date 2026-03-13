@@ -14,6 +14,7 @@ import {
   onMessage,
   playAlertSound,
   playFaaahSound,
+  setGlobalTimeOffset,
 } from './channel';
 
 export default function App() {
@@ -29,6 +30,9 @@ export default function App() {
   useEffect(() => {
     // Receive full state sync from server
     socket.on('state-sync', (state) => {
+      if (state.googleTimeOffset !== undefined) {
+        setGlobalTimeOffset(state.googleTimeOffset);
+      }
       setPhaseState(state.phase);
       if (state.targetTime) {
         setTargetTimeState(state.targetTime);
@@ -38,6 +42,10 @@ export default function App() {
       if (state.targetTime) {
         localStorage.setItem('cyberthon_target_time', String(state.targetTime));
       }
+    });
+
+    socket.on('time-sync', (data) => {
+      setGlobalTimeOffset(data.googleTimeOffset);
     });
 
     // Receive notifications from server
@@ -53,6 +61,7 @@ export default function App() {
 
     return () => {
       socket.off('state-sync');
+      socket.off('time-sync');
       socket.off('notification');
       socket.off('sound-faaah');
     };

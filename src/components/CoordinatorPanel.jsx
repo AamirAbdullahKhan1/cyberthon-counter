@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { sendNotification, setTargetTime, setTimerDuration, resetState, setPhase, sendFaaahSound } from '../channel';
+import { sendNotification, setTargetTime, setTimerDuration, resetState, setPhase, sendFaaahSound, getSyncedTime } from '../channel';
 import socket from '../socket'; // ensure we can emit via socket too if needed
 import '../styles/CoordinatorPanel.css';
 
@@ -36,7 +36,7 @@ export default function CoordinatorPanel({ isOpen, onClose }) {
         const mins = parseInt(duration, 10);
         if (isNaN(mins) || mins <= 0) return;
         setTimerDuration(mins);
-        const targetTime = Date.now() + mins * 60 * 1000;
+        const targetTime = getSyncedTime() + mins * 60 * 1000;
         setTargetTime(targetTime);
     };
 
