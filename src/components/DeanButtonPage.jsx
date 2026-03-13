@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import socket from '../socket';
-import { getTimerDuration, setTargetTime, setPhase } from '../channel';
+import { getTimerDuration, setTargetTime, setPhase, getSyncedTime } from '../channel';
 import '../styles/DeanButtonPage.css';
 
 export default function DeanButtonPage() {
@@ -14,7 +14,7 @@ export default function DeanButtonPage() {
         
         // Also explicitly set the local broadcast state as a fallback
         const durationMs = getTimerDuration() * 60 * 1000;
-        const targetTime = Date.now() + durationMs;
+        const targetTime = getSyncedTime() + durationMs;
         setTargetTime(targetTime);
         setPhase('countdown');
     };

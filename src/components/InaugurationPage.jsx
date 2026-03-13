@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { setPhase, setTargetTime, getTimerDuration } from '../channel';
+import { setPhase, setTargetTime, getTimerDuration, getSyncedTime } from '../channel';
 import socket from '../socket';
 import pixelBlastVideo from '../assets/pixel-blast.webm';
 import '../styles/InaugurationPage.css';
@@ -17,7 +17,7 @@ export default function InaugurationPage() {
             socket.emit('initiate');
             // Also set locally via BroadcastChannel for instant feedback
             const durationMs = getTimerDuration() * 60 * 1000;
-            const targetTime = Date.now() + durationMs;
+            const targetTime = getSyncedTime() + durationMs;
             setTargetTime(targetTime);
             setPhase('countdown');
         }, 600);

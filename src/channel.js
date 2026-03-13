@@ -6,7 +6,23 @@ const STORAGE_KEYS = {
   PHASE: 'cyberthon_phase',
   TARGET_TIME: 'cyberthon_target_time',
   TIMER_DURATION: 'cyberthon_timer_duration',
+  TIME_OFFSET: 'cyberthon_time_offset',
 };
+
+// --- Time Sync ---
+export let globalTimeOffset = parseInt(localStorage.getItem(STORAGE_KEYS.TIME_OFFSET) || '0', 10);
+
+export function setGlobalTimeOffset(offset) {
+  if (offset !== globalTimeOffset) {
+    globalTimeOffset = offset;
+    localStorage.setItem(STORAGE_KEYS.TIME_OFFSET, String(offset));
+  }
+}
+
+// Absolute time synced to Google
+export function getSyncedTime() {
+  return Date.now() + globalTimeOffset;
+}
 
 // Get current phase from localStorage
 export function getPhase() {
@@ -44,12 +60,12 @@ export function setTimerDuration(minutes) {
 
 // Send notification to all tabs
 export function sendNotification(message) {
-  channel.postMessage({ type: 'notification', message, id: Date.now() });
+  channel.postMessage({ type: 'notification', message, id: getSyncedTime() });
 }
 
 // Send FAAAHHHH sound trigger to all tabs
 export function sendFaaahSound() {
-  channel.postMessage({ type: 'sound-faaah', id: Date.now() });
+  channel.postMessage({ type: 'sound-faaah', id: getSyncedTime() });
 }
 
 // Listen for messages
